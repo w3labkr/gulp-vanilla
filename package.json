@@ -1,7 +1,7 @@
 {
   "name": "gulp-vanilla",
-  "version": "1.0.4",
-  "description": "",
+  "version": "1.0.5",
+  "description": "A simple and efficient Gulp setup for modern web development.",
   "homepage": "https://github.com/w3labkr/gulp-vanilla#readme",
   "license": "MIT",
   "author": "W3LabKr",

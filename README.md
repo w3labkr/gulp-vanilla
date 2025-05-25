@@ -2,30 +2,21 @@
 
 A simple and efficient Gulp setup for modern web development.
 
-## Project Structure
+## Directory Structure
 
-The project directory is organized as follows:
-
-```plaintext
-/ (root)
-├── dist/                 # Distribution folder for build outputs
-├── LICENSE               # License file
-├── README.md             # Project documentation
-├── gulpfile.js           # Gulp task definitions
-├── package-lock.json     # Dependency lock file
-├── package.json          # Project metadata and dependencies
-└── tailwind.config.js    # TailwindCSS configuration
+```text
+src/                     # Source files for the project
+├── assets/              # Static assets
+│   ├── css/             # CSS files
+│   ├── fonts/           # Font files
+│   ├── images/          # Image files
+│   └── js/              # JavaScript files
+├── data/                # Data files (e.g., JSON, CSV)
+├── en/                  # English version of the site
+├── index.html           # Main HTML file for the default language
+├── template-parts/      # Reusable HTML partials/components
+└── templates/           # Page layout templates
 ```
-
-This structure ensures a clean and modular organization for the project.
-
-## Features
-
-- **Task Automation**: Automate repetitive tasks like minification, concatenation, and more.
-- **TailwindCSS Integration**: Built-in support for TailwindCSS.
-- **PostCSS Support**: Process your CSS with PostCSS plugins like Autoprefixer and CSSNano.
-- **Image Optimization**: Optimize images with `gulp-imagemin`.
-- **Code Formatting**: Beautify and lint your code with Prettier and ESLint.
 
 ## Installation
 
@@ -49,30 +40,30 @@ This structure ensures a clean and modular organization for the project.
 
 ## Usage
 
-### Development
+Available scripts:
 
-Start the development server and watch for file changes:
+* `npm test`: Echoes an error message as no tests are specified.
+* `npm run watch`: Starts Gulp in watch mode, recompiling assets on change.
+* `npm run build`: Builds the project for production.
+* `npm run clean:files`: Removes `node_modules`, `package-lock.json`, and the `dist` folder.
+* `npm run clean:cache`: Cleans the npm cache.
+* `npm run clean`: Runs both `clean:files` and `clean:cache`.
+* `npm run upgrade:latest`: Cleans the project, updates dependencies to their latest versions, and reinstalls them.
+* `npm run reinstall`: Cleans the project and reinstalls dependencies.
 
-```bash
-npm run watch
-```
+## Contributing
 
-### Build
+Contributions are welcome! Please follow these steps:
 
-Generate a production-ready build:
+1. Fork the repository.
+2. Create a new branch (`git checkout -b feature/your-feature-name`).
+3. Make your changes.
+4. Commit your changes (`git commit -m 'Add some feature'`).
+5. Push to the branch (`git push origin feature/your-feature-name`).
+6. Open a pull request.
 
-```bash
-npm run build
-```
-
-### Clean
-
-Remove `node_modules`, cache, and build files:
-
-```bash
-npm run clean
-```
+Please make sure to update tests as appropriate.
 
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
