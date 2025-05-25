@@ -34,9 +34,6 @@ function errorHandler(taskName) {
     if (error.codeFrame) {
       console.error(error.codeFrame);
     }
-    if (this && typeof this.emit === "function") {
-      this.emit("end");
-    }
   };
 }
 
@@ -231,28 +228,25 @@ async function jsMinifyIndividual() {
     .pipe(dest("dist/assets/js"));
 }
 
-async function publish() {
-  console.log("Publishing static assets (data, fonts, etc.)...");
+async function publishPublic() {
+  console.log("Publishing public files...");
   const { default: debug } = await import("gulp-debug");
+  return src(["public/**/*"], { allowEmpty: true })
+    .pipe(plumber(errorHandler("publish-public")))
+    .pipe(debug({ title: "publish-public - files in stream:" }))
+    .pipe(dest("dist"));
+}
 
-  const fontStream = src(["src/assets/fonts/**/*"], { allowEmpty: true })
+async function publishFonts() {
+  console.log("Publishing fonts...");
+  const { default: debug } = await import("gulp-debug");
+  return src(["src/assets/fonts/**/*"], { allowEmpty: true })
     .pipe(plumber(errorHandler("publish-fonts")))
     .pipe(debug({ title: "publish-fonts - files in stream:" }))
     .pipe(dest("dist/assets/fonts"));
-
-  const dataStream = src(["src/data/**/*"], { allowEmpty: true })
-    .pipe(plumber(errorHandler("publish-data")))
-    .pipe(debug({ title: "publish-data - files in stream:" }))
-    .pipe(dest("dist/data"));
-
-  return mergeStream(fontStream, dataStream)
-    .on("end", function () {
-      console.log("publish task finished successfully.");
-    })
-    .on("error", function (err) {
-      console.error("publish task failed:", err);
-    });
 }
+
+const publish = parallel(publishPublic, publishFonts);
 
 // --- Watch Tasks ---
 function watchFiles() {
@@ -261,8 +255,8 @@ function watchFiles() {
   watch("src/assets/images/**/*", series(imageTranspile));
   watch("src/assets/css/**/*.css", series(cssProcess, cssMinifyIndividual));
   watch("src/assets/js/**/*.js", series(jsProcess, jsMinifyIndividual));
-  watch("src/data/**/*", series(publish));
   watch("src/assets/fonts/**/*", series(publish));
+  watch("public/**/*", series(publish));
 }
 
 // --- Exported Gulp Tasks ---
