@@ -1,0 +1,23 @@
+@@include('../header.html', {
+"bodyClass": "has-sidebar has-sidebar--2",
+"templateName": "sidebar-content-sidebar",
+})
+
+<!-- @@include('../template-parts/hero.html') -->
+<!-- @@include('../template-parts/breadcrumb.html') -->
+
+<div id="main-content" class="main-area">
+  <div class="main-inner container-fluid">
+
+    @@include('../template-parts/sidebar-1.html')
+
+    <main id="primary" class="site-main">
+      sidebar-content-sidebar
+    </main>
+
+    @@include('../template-parts/sidebar-2.html')
+
+  </div><!-- .container -->
+</div><!-- #main-content -->
+
+@@include('../footer.html')
